@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option go_package = "pb/api";
+
+import "api/tasks_delivery.proto";
+
+package pb;
+
+// The service definition
+service TasksService {
+  rpc AllTasks (AllTasksRequest) returns (AllTasksResponse) {}
+
+  rpc CreateTask (CreateTaskRequest) returns (CreateTaskResponse) {}
+
+}

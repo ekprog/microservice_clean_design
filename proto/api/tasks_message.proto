@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+option go_package = "pb/api";
+
+import "google/protobuf/timestamp.proto";
+
+
+message Task {
+  int64 id = 1;
+  string name = 2;
+  google.protobuf.Timestamp created_at = 3;
+  google.protobuf.Timestamp updated_at = 4;
+}

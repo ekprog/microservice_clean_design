@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+option go_package = "pb/api";
+
+import "api/app.proto";
+import "api/tasks_message.proto";
+
+// ALL TASKS
+
+message AllTasksRequest {}
+
+message AllTasksResponse {
+  StatusResponse status = 1;
+  repeated Task tasks = 2;
+}
+
+// CREATE TASK
+
+message CreateTaskRequest {
+  string name = 1;
+}
+
+message CreateTaskResponse {
+  StatusResponse status = 1;
+  int64 id = 2;
+}
