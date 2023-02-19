@@ -31,3 +31,7 @@ Here we implement main logic of our service. Whole implementation depends on dom
 After running of UseCases we should send result back to client. Here we can implement different clients types. \
 For example, gRPC client, REST client, CLI client. \
 So this layer doesn't depend on implementation of our core (interactors) and easy for testing.
+
+## Examples
+
+Full example with JWT Auth microservice using this clean design you can find here - [https://github.com/ekprog/grpc_auth_service](https://github.com/ekprog/grpc_auth_service)
