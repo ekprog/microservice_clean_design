@@ -3,15 +3,15 @@ module microservice_clean_design
 go 1.19
 
 require (
-	github.com/goombaio/namegenerator v0.0.0-20181006234301-989e774b106e
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.15.0
+	github.com/jasonlvhit/gocron v0.0.1
 	github.com/joho/godotenv v1.5.1
 	github.com/lib/pq v1.10.7
 	github.com/pkg/errors v0.9.1
 	github.com/pressly/goose v2.7.0+incompatible
-	github.com/sethvargo/go-password v0.2.0
 	github.com/sirupsen/logrus v1.9.0
 	github.com/stretchr/testify v1.8.1
+	go.uber.org/dig v1.16.1
 	google.golang.org/grpc v1.53.0
 	google.golang.org/protobuf v1.28.1
 )

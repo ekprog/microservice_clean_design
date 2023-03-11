@@ -2,16 +2,16 @@ package repos
 
 import (
 	"database/sql"
-	"microservice_clean_design/app"
+	"microservice_clean_design/app/core"
 	"microservice_clean_design/domain"
 )
 
 type TaskDBRepo struct {
-	log app.Logger
+	log core.Logger
 	db  *sql.DB
 }
 
-func NewTaskDBRepo(log app.Logger, db *sql.DB) domain.TasksRepository {
+func NewTaskDBRepo(log core.Logger, db *sql.DB) *TaskDBRepo {
 	return &TaskDBRepo{
 		db:  db,
 		log: log,

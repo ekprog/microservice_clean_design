@@ -4,17 +4,18 @@ import (
 	"context"
 	"google.golang.org/protobuf/types/known/timestamppb"
 	"microservice_clean_design/app"
+	"microservice_clean_design/app/core"
 	"microservice_clean_design/domain"
 	pb "microservice_clean_design/pkg/pb/api"
 )
 
 type TasksDeliveryService struct {
 	pb.TasksServiceServer
-	log        app.Logger
+	log        core.Logger
 	tasksUCase domain.TasksInteractor
 }
 
-func NewTasksDeliveryService(log app.Logger, tasksUCase domain.TasksInteractor) *TasksDeliveryService {
+func NewTasksDeliveryService(log core.Logger, tasksUCase domain.TasksInteractor) *TasksDeliveryService {
 	return &TasksDeliveryService{
 		log:        log,
 		tasksUCase: tasksUCase,

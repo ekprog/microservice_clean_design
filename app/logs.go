@@ -1,16 +1,18 @@
 package app
 
 import (
+	"fmt"
 	logrus "github.com/sirupsen/logrus"
+	"microservice_clean_design/app/core"
 	"microservice_clean_design/app/logs_hooks"
 	"os"
 )
 
 var (
-	log Logger
+	log core.Logger
 )
 
-func InitLogs(rootDir ...string) (Logger, error) {
+func InitLogs(rootDir ...string) (core.Logger, error) {
 
 	basePath := "."
 	if len(rootDir) != 0 {
@@ -42,14 +44,6 @@ func InitLogs(rootDir ...string) (Logger, error) {
 	return log, nil
 }
 
-type Logger interface {
-	Debug(msg string, args ...interface{})
-	Warn(msg string, args ...interface{})
-	Info(msg string, args ...interface{})
-	Error(msg string, args ...interface{})
-	Fatal(msg string, args ...interface{})
-}
-
 type DefaultLogger struct {
 	logger *logrus.Logger
 }
@@ -76,4 +70,29 @@ func (l *DefaultLogger) Error(msg string, args ...interface{}) {
 
 func (l *DefaultLogger) Fatal(msg string, args ...interface{}) {
 	l.logger.Fatalf(msg, args...)
+}
+
+func (l *DefaultLogger) DebugWrap(err error, msg string, args ...interface{}) {
+	msg = fmt.Sprintf(msg, args...)
+	l.logger.Debugf("%s: %s", msg, err.Error())
+}
+
+func (l *DefaultLogger) WarnWrap(err error, msg string, args ...interface{}) {
+	msg = fmt.Sprintf(msg, args...)
+	l.logger.Warnf("%s: %s", msg, err.Error())
+}
+
+func (l *DefaultLogger) InfoWrap(err error, msg string, args ...interface{}) {
+	msg = fmt.Sprintf(msg, args...)
+	l.logger.Infof("%s: %s", msg, err.Error())
+}
+
+func (l *DefaultLogger) ErrorWrap(err error, msg string, args ...interface{}) {
+	msg = fmt.Sprintf(msg, args...)
+	l.logger.Errorf("%s: %s", msg, err.Error())
+}
+
+func (l *DefaultLogger) FatalWrap(err error, msg string, args ...interface{}) {
+	msg = fmt.Sprintf(msg, args...)
+	l.logger.Fatalf("%s: %s", msg, err.Error())
 }

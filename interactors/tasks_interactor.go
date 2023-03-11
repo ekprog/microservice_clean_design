@@ -2,16 +2,16 @@ package interactors
 
 import (
 	"github.com/pkg/errors"
-	"microservice_clean_design/app"
+	"microservice_clean_design/app/core"
 	"microservice_clean_design/domain"
 )
 
 type TasksInteractor struct {
-	log       app.Logger
+	log       core.Logger
 	tasksRepo domain.TasksRepository
 }
 
-func NewTasksUCase(log app.Logger, tasksRepo domain.TasksRepository) domain.TasksInteractor {
+func NewTasksUCase(log core.Logger, tasksRepo domain.TasksRepository) domain.TasksInteractor {
 	return &TasksInteractor{
 		log:       log,
 		tasksRepo: tasksRepo,
