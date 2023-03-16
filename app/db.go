@@ -5,7 +5,7 @@ import (
 	"fmt"
 	_ "github.com/lib/pq"
 	"github.com/pressly/goose"
-	"os"
+	"github.com/spf13/viper"
 )
 
 var (
@@ -14,16 +14,23 @@ var (
 
 func connectionString() string {
 	return fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
-		os.Getenv("DB_HOST"),
-		os.Getenv("DB_PORT"),
-		os.Getenv("DB_USER"),
-		os.Getenv("DB_PASSWORD"),
-		os.Getenv("DB_NAME"))
+		viper.GetString("db.host"),
+		viper.GetString("db.port"),
+		viper.GetString("db.user"),
+		viper.GetString("db.pass"),
+		viper.GetString("db.name"))
 }
 
 // InitDatabase For Vanilla SQL
 func InitDatabase() (*sql.DB, error) {
-	localDB, err := sql.Open(os.Getenv("DB_DRIVER"), connectionString())
+
+	enabled := viper.GetBool("db.enabled")
+	if !enabled {
+		return nil, nil
+	}
+
+	driver := viper.GetString("db.driver")
+	localDB, err := sql.Open(driver, connectionString())
 	if err != nil {
 		return nil, err
 	}
@@ -35,6 +42,11 @@ func InitDatabase() (*sql.DB, error) {
 }
 
 func RunMigrations(rootDir ...string) error {
+
+	enabled := viper.GetBool("db.enabled")
+	if !enabled {
+		return nil
+	}
 
 	basePath := "."
 	if len(rootDir) != 0 {

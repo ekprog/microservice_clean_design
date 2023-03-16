@@ -1,8 +1,8 @@
 package bootstrap
 
 import (
-	"microservice_clean_design/app/job"
-	"microservice_clean_design/jobs"
+	"microservice/app/job"
+	"microservice/jobs"
 )
 
 func initJobs() error {

@@ -4,9 +4,10 @@ import (
 	"database/sql"
 	"github.com/pkg/errors"
 	"go.uber.org/dig"
-	"microservice_clean_design/app"
-	"microservice_clean_design/app/core"
-	"microservice_clean_design/app/job"
+	"microservice/app"
+	"microservice/app/core"
+	"microservice/app/job"
+	"microservice/app/kafka"
 )
 
 func Run(rootPath ...string) error {
@@ -21,6 +22,12 @@ func Run(rootPath ...string) error {
 	logger, err := app.InitLogs(rootPath...)
 	if err != nil {
 		return errors.Wrap(err, "error while init logs")
+	}
+
+	// Storage
+	err = app.InitStorage()
+	if err != nil {
+		return errors.Wrap(err, "error while init storage")
 	}
 
 	// Database
@@ -62,12 +69,22 @@ func Run(rootPath ...string) error {
 		return errors.Wrap(err, "cannot init jobs")
 	}
 
+	// KAFKA
+	err = kafka.InitKafka(logger)
+	if err != nil {
+		return errors.Wrap(err, "cannot init kafka")
+	}
+
 	// CORE
 	if err := initDependencies(di); err != nil {
 		return errors.Wrap(err, "error while init dependencies")
 	}
 
+	//
+	//
 	// HERE CORE READY FOR WORK...
+	//
+	//
 
 	// CRON
 	if err := initJobs(); err != nil {

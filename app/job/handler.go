@@ -2,8 +2,9 @@ package job
 
 import (
 	"github.com/jasonlvhit/gocron"
+	"github.com/spf13/viper"
 	"go.uber.org/dig"
-	"microservice_clean_design/app/core"
+	"microservice/app/core"
 	"strconv"
 	"strings"
 )
@@ -32,6 +33,12 @@ func NewJob(name string, fn interface{}, job *gocron.Job) {
 }
 
 func Start() error {
+
+	enabled := viper.GetBool("jobs.enabled")
+	if !enabled {
+		return nil
+	}
+
 	go gocron.Start()
 	return nil
 }

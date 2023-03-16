@@ -1,0 +1,25 @@
+app:
+  debug: true
+  grpc:
+    tsl: false
+    port: 8080
+
+db:
+  enabled: false
+  driver: postgres
+  host: localhost
+  port: 5432
+  name: your_db
+  user: postgres
+  pass: your_password
+
+storage:
+  path: ./storage
+
+jobs:
+  enabled: false
+
+kafka:
+  enabled: false
+  brokers:
+    - 0.0.0.0:0000

@@ -3,9 +3,9 @@ package app
 import (
 	"fmt"
 	logrus "github.com/sirupsen/logrus"
-	"microservice_clean_design/app/core"
-	"microservice_clean_design/app/logs_hooks"
-	"os"
+	"github.com/spf13/viper"
+	"microservice/app/core"
+	"microservice/app/logs_hooks"
 )
 
 var (
@@ -30,7 +30,7 @@ func InitLogs(rootDir ...string) (core.Logger, error) {
 		DisableTimestamp: true,
 	})
 	logrusLogger.SetReportCaller(true)
-	if os.Getenv("APP_DEBUG") == "true" {
+	if viper.GetString("app.debug") == "true" {
 		logrusLogger.SetLevel(logrus.TraceLevel)
 	} else {
 		logrusLogger.SetLevel(logrus.InfoLevel)

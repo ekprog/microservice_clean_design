@@ -3,10 +3,10 @@ package delivery
 import (
 	"context"
 	"google.golang.org/protobuf/types/known/timestamppb"
-	"microservice_clean_design/app"
-	"microservice_clean_design/app/core"
-	"microservice_clean_design/domain"
-	pb "microservice_clean_design/pkg/pb/api"
+	"microservice/app"
+	"microservice/app/core"
+	"microservice/domain"
+	pb "microservice/pkg/pb/api"
 )
 
 type TasksDeliveryService struct {

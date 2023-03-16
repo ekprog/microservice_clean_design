@@ -2,7 +2,7 @@ package main
 
 import (
 	"log"
-	"microservice_clean_design/bootstrap"
+	"microservice/bootstrap"
 )
 
 func main() {

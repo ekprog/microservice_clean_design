@@ -6,6 +6,7 @@ import (
 	"crypto/x509"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/pkg/errors"
+	"github.com/spf13/viper"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
@@ -14,7 +15,6 @@ import (
 	"google.golang.org/grpc/status"
 	"io/ioutil"
 	"net"
-	"os"
 	"strconv"
 )
 
@@ -29,7 +29,7 @@ func InitGRPCServer() (*grpc.Server, *runtime.ServeMux, error) {
 	var options []grpc.ServerOption
 
 	// TSL
-	tslEnable := os.Getenv("TSL_ENABLE") == "true"
+	tslEnable := viper.GetString("app.grpc.tsl") == "true"
 	if tslEnable {
 		crt := "./cert/service.pem"
 		key := "./cert/service.key"
@@ -80,7 +80,7 @@ func InitGRPCServer() (*grpc.Server, *runtime.ServeMux, error) {
 
 func RunGRPCServer() {
 
-	gRPCPort := os.Getenv("GRPC_PORT")
+	gRPCPort := viper.GetString("app.grpc.port")
 
 	reflection.Register(grpcServer)
 

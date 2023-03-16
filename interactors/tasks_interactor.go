@@ -2,8 +2,8 @@ package interactors
 
 import (
 	"github.com/pkg/errors"
-	"microservice_clean_design/app/core"
-	"microservice_clean_design/domain"
+	"microservice/app/core"
+	"microservice/domain"
 )
 
 type TasksInteractor struct {
